@@ -17,6 +17,7 @@ from pathlib import Path
 
 sys.dont_write_bytecode = True
 
+from acp import check_catalog
 from worker import capture, catalog_has, failure_kind, run_worker, settings
 from workspaces import choose, collect, export_patch, git, path_name, prepare, shareable, source_tree
 
@@ -38,6 +39,9 @@ STATUS_MESSAGES = {
     "timeout": "The worker exceeded its deadline.",
     "unsupported_cli": "The installed agy CLI lacks a required headless or session-settings option.",
     "unexpected_delegation": "The provider reported that a worker spawned another agent.",
+    "unsupported_acp": "Antigravity did not negotiate ACP protocol version 1.",
+    "acp_invalid_output": "Antigravity did not return a usable ACP catalog response.",
+    "acp_disconnected": "Antigravity closed the ACP connection before returning the catalog.",
 }
 
 
@@ -335,11 +339,18 @@ async def execute(args):
     agy = locate_cli()
     if args.action == "healthcheck":
         probe = None
-        if args.probe:
+        if args.probe or args.acp:
             check_customizations()
         with tempfile.TemporaryDirectory(prefix="delegateH-check-") as temp:
             cwd = Path(temp)
             model = config["worker_model"]
+            if args.acp:
+                result = await check_catalog(agy, cwd, model)
+                status = result["status"]
+                result.update(transport="acp", worker_model=model,
+                              message=STATUS_MESSAGES.get(status))
+                print(json.dumps(result, indent=2))
+                return status != "listed"
             code, version, _ = await capture([agy, "--version"], cwd, 15)
             problem = await preflight(agy, model, cwd)
             if args.probe and not problem:
@@ -409,7 +420,11 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     commands = parser.add_subparsers(dest="action", required=True)
     health = commands.add_parser("healthcheck", help="Check CLI and exact model catalog")
-    health.add_argument("--probe", action="store_true", help="Also run one minimal subscription inference")
+    health_modes = health.add_mutually_exclusive_group()
+    health_modes.add_argument("--probe", action="store_true",
+                              help="Also run one minimal subscription inference")
+    health_modes.add_argument("--acp", action="store_true",
+                              help="Check the ACP session model catalog without inference")
     run = commands.add_parser("run", help="Start a supervised round of 1–5 independent workers")
     run.add_argument("manifest", type=Path)
     run.add_argument("--repo", type=Path)

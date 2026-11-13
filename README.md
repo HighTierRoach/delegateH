@@ -25,6 +25,8 @@ $delegateH AUTO review this change and delegate independent checks if useful.
 
 The default worker is `gemini-4-hydrogen-medium`. The runner uses Antigravity account sign-in and included quota, with AI credit overages disabled. It excludes Gemini API keys and Cloud ADC environment settings. If the exact model is absent from your account catalog, the runner stops before dispatch. Use `healthcheck --probe` for a minimal live check after the model is listed.
 
+Use `healthcheck --acp` to inspect the official Antigravity ACP session catalog and its session capabilities without submitting a prompt.
+
 Local tests cover three concurrent fixture workers, separate Git snapshots, patch review and integration, failure handling, and cleanup. Live Hydrogen inference and concurrency have yet to be verified. macOS is the tested platform.
 
 See the [operations guide](delegateH/references/operations.md) for manifest fields, scope rules, and patch review.

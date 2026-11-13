@@ -47,7 +47,7 @@
     <div class="wrap content">
       <aside class="status" aria-labelledby="status-title">
         <h2 id="status-title">Verification status</h2>
-        <p>Codex discovery and the local dispatcher were tested on macOS, including three concurrent fixture workers. Live Hydrogen inference and concurrency remain unverified. The test account returned <code>model_unavailable</code>.</p>
+        <p>Codex discovery and the local dispatcher were tested on macOS, including three concurrent fixture workers. The signed-in Antigravity CLI and ACP catalogs both omitted Hydrogen during testing, so live inference and concurrency remain unverified.</p>
       </aside>
 
       <section id="setup" class="section-grid">
@@ -81,6 +81,7 @@ test ! -e "$HOME/.agents/skills/delegateH" &amp;&amp;
 python3 "$runner" healthcheck</code></pre>
             </div>
             <p><code>listed</code> means the pinned Hydrogen model appears in your account catalog. Run <code>python3 "$runner" healthcheck --probe</code> to check a live response. If you see <code>model_unavailable</code>, check <code>agy models</code> and your Antigravity plan and model access.</p>
+            <p>Run <code>python3 "$runner" healthcheck --acp</code> to inspect the official Antigravity ACP session catalog without submitting a prompt.</p>
           </li>
         </ol>
       </section>

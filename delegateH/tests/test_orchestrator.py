@@ -18,6 +18,29 @@ args = sys.argv[1:]
 model = "gemini-4-hydrogen-medium"
 cwd = pathlib.Path.cwd()
 home = pathlib.Path.home()
+if args[:1] == ["acp"]:
+    assert "--sandbox" in args
+    assert "GEMINI_API_KEY" not in os.environ and "AGY_ADC_AUTH" not in os.environ
+    for line in sys.stdin:
+        request = json.loads(line)
+        method = request["method"]
+        if method == "initialize":
+            assert request["params"]["protocolVersion"] == 1
+            result = {"protocolVersion": 1, "agentCapabilities": {
+                "sessionCapabilities": {"close": {}, "resume": {}}, "loadSession": True}}
+        elif method == "session/new":
+            assert request["params"] == {"cwd": str(cwd.resolve()), "mcpServers": []}
+            available = "gemini-3.8-flash-high" if (home / "missing-model").exists() else model
+            result = {"sessionId": "test-session", "models": {
+                "availableModels": [{"modelId": available}]}}
+        elif method == "session/close":
+            assert request["params"] == {"sessionId": "test-session"}
+            (home / "acp-closed").touch()
+            result = {}
+        else:
+            raise AssertionError(method)
+        print(json.dumps({"jsonrpc": "2.0", "id": request["id"], "result": result}), flush=True)
+    sys.exit(0)
 if args == ["--help"]:
     print("--settings --input-format --output-format --json-schema --model --mode --sandbox --disable-slash-commands --log-file", file=sys.stderr)
     sys.exit(0)
@@ -220,6 +243,17 @@ class LocalIntegration(unittest.TestCase):
         result = self.cli("run", self.manifest(["read"], "DEBUG"))
         self.assertEqual(result.returncode, 2)
         self.assertFalse(list(self.state.glob("run-*")))
+
+    def test_acp_catalog_closes_session_without_prompting(self):
+        listed = self.cli("healthcheck", "--acp")
+        self.assertEqual(listed.returncode, 0, listed.stderr)
+        self.assertTrue((self.home / "acp-closed").is_file())
+        self.assertEqual(json.loads(listed.stdout)["available_models"], [MODEL])
+        self.assertTrue(json.loads(listed.stdout)["supports_resume"])
+        (self.home / "missing-model").touch()
+        missing = self.cli("healthcheck", "--acp")
+        self.assertEqual(missing.returncode, 1)
+        self.assertEqual(json.loads(missing.stdout)["status"], "model_unavailable")
 
     def test_timeout_and_cancellation_terminate_process_groups(self):
         timed = self.cli("run", self.manifest(["hang"]), "--timeout", 1)

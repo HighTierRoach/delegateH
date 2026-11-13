@@ -15,6 +15,14 @@ For personal subscription usage, open `~/.local/bin/agy` interactively if sign-i
 
 If Hydrogen is absent from `agy models`, use Antigravity’s Models & Usage page to confirm the plan and refresh entitlements. If the picker still shows Hydrogen unavailable, wait for account access or contact Google support. [Google’s Hydrogen rollout announcement](https://blog.google/innovation-and-ai/models-and-research/gemini-models/introducing-gemini-4-hydrogen/).
 
+To inspect the official Agent Client Protocol (ACP) catalog, run:
+
+```sh
+python3 "$delegateH_runner" healthcheck --acp
+```
+
+This opens an empty sandboxed session using Antigravity’s cached sign-in, reads the advertised model IDs and session capabilities, and closes the session when supported. It submits no inference prompt. Worker dispatch uses headless `agy`. ACP exposes the models available to the signed-in account. [Google’s ACP documentation](https://antigravity.google/docs/ide/extensions/acp/).
+
 ## Dispatch a round
 
 Create a private manifest outside the project. Supply one task per worker. `workers` defaults to three and acts as a round ceiling. For five-way parallelism, write five independent tasks and set `workers` to five. Set `share` to literal paths from the committed tree, with directory names accepted for recursive selection. Set `write` to exact file paths. Include an existing writable file in `share`. Use a new path for a new file. Omit both arrays for a prompt-only worker and omit `--repo` if no task needs a project.
