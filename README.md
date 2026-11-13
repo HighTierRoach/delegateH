@@ -27,7 +27,7 @@ The default worker is `gemini-4-hydrogen-medium`. The runner uses Antigravity ac
 
 Use `healthcheck --acp` to inspect the official Antigravity ACP session catalog and its session capabilities without submitting a prompt.
 
-Local tests cover three concurrent fixture workers, separate Git snapshots, patch review and integration, failure handling, and cleanup. Live Hydrogen inference and concurrency have yet to be verified. macOS is the tested platform.
+Local tests on macOS cover three concurrent fixture workers, separate Git snapshots, patch review and integration, failure handling, and cleanup. A manual Gemini for Mac task completed with 4 Hydrogen selected. The Antigravity CLI and ACP catalogs still omitted Hydrogen, so live `delegateH` dispatch remains unverified.
 
 See the [operations guide](delegateH/references/operations.md) for manifest fields, scope rules, and patch review.
 
