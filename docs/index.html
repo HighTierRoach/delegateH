@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Use Gemini Tasks on Mac with delegateH when Gemini 4 Hydrogen is unavailable in Antigravity on your promotional or trial Google AI Pro plan.">
+  <meta name="description" content="Choose your Codex orchestrator and Gemini Tasks worker. Use delegateH on Mac when 4 Hydrogen is unavailable in Antigravity on your promotional Google AI Pro plan.">
   <meta name="theme-color" content="#141d1a">
   <title>delegateH · Codex and Gemini Tasks</title>
   <link rel="stylesheet" href="styles.css">
@@ -36,9 +36,9 @@
         <aside class="flow" aria-labelledby="flow-title">
           <h2 id="flow-title">How a round works</h2>
           <dl>
-            <div><dt>Plan</dt><dd>Sol scopes independent tasks<small>gpt-6.1-sol</small></dd></div>
-            <div><dt>Dispatch</dt><dd>Gemini for Mac runs the tasks<small>4 Hydrogen</small></dd></div>
-            <div><dt>Review</dt><dd>Sol checks evidence and proposed patches</dd></div>
+            <div><dt>Plan</dt><dd>Your selected Codex model scopes independent tasks</dd></div>
+            <div><dt>Dispatch</dt><dd>Your selected Gemini Tasks model runs the tasks<small>Default worker: 4 Hydrogen</small></dd></div>
+            <div><dt>Review</dt><dd>Codex checks evidence and proposed patches</dd></div>
           </dl>
         </aside>
       </div>
@@ -57,12 +57,12 @@
         </div>
         <ol class="steps">
           <li>
-            <h3>Check Hydrogen in Gemini Tasks</h3>
-            <p>Install Gemini for Mac and sign in with the Google account that has your promotional plan. Open a new conversation, choose <strong>Task</strong>, and check that you can select <strong>4 Hydrogen</strong>. Complete Tasks onboarding if prompted. The workaround requires access to both Task mode and 4 Hydrogen. <a href="https://gemini.google/desktop/">Download Gemini</a> · <a href="https://support.google.com/gemini/answer/17208717">Google’s Tasks setup guide</a></p>
+            <h3>Check your worker model in Gemini Tasks</h3>
+            <p>Install Gemini for Mac and sign in with the Google account that has your plan. Open a new conversation, choose <strong>Task</strong>, and look for your preferred worker. To run Hydrogen, check that <strong>4 Hydrogen</strong> appears. Complete Tasks onboarding if prompted. <a href="https://gemini.google/desktop/">Download Gemini</a> · <a href="https://support.google.com/gemini/answer/17208717">Google’s Tasks setup guide</a></p>
           </li>
           <li>
             <h3>Install the Codex skill</h3>
-            <p>Install Git and select GPT-6.1 Sol in Codex. From a fresh checkout, copy the skill folder into Codex’s user skills directory. If you already have delegateH installed, review your local changes before updating it.</p>
+            <p>From a fresh Git checkout, copy the skill folder into Codex’s user skills directory. If you already have delegateH installed, review your local changes before updating it.</p>
             <div class="snippet">
               <div class="snippet-bar"><span>Shell</span><button type="button" hidden aria-label="Copy installation commands">Copy</button></div>
               <pre><code>git clone https://github.com/HighTierRoach/delegateH.git
@@ -74,7 +74,7 @@ test ! -e "$HOME/.agents/skills/delegateH" &amp;&amp;
           </li>
           <li>
             <h3>Verify a response</h3>
-            <p>Submit a simple task such as <code>Compute 12 + 7.</code> After it completes, open the response’s <strong>More actions</strong> menu and look for <strong>Used 4 Hydrogen model</strong>.</p>
+            <p>Submit a simple task such as <code>Compute 12 + 7.</code> After it completes, open the response’s <strong>More actions</strong> menu and check the <strong>Used … model</strong> entry. Live tests confirmed both 4 Hydrogen and 4 Argon.</p>
           </li>
         </ol>
       </section>
@@ -82,22 +82,40 @@ test ! -e "$HOME/.agents/skills/delegateH" &amp;&amp;
       <section id="usage" class="section-grid">
         <div>
           <h2>Usage</h2>
-          <p class="section-intro">Invoke the skill in a Codex session with Sol selected.</p>
+          <p class="section-intro">Choose your orchestrator in Codex and your worker in Gemini Tasks.</p>
         </div>
         <div>
+          <h3>Choose your models</h3>
+          <p id="coordinator-help">Select your orchestrator in the Codex model picker before pasting the prompt. From the CLI, use <code>codex -m &lt;model-id&gt;</code>.</p>
+          <div class="model-controls" hidden>
+            <label for="coordinator-model">
+              Codex orchestrator
+              <input type="text" id="coordinator-model" placeholder="Current Codex model" aria-describedby="coordinator-help" spellcheck="false" autocapitalize="off" autocomplete="off">
+            </label>
+            <label for="worker-model">
+              Gemini Tasks worker
+              <input type="text" id="worker-model" list="task-models" value="4 Hydrogen" aria-describedby="worker-help" spellcheck="false" autocomplete="off">
+              <datalist id="task-models">
+                <option value="4 Hydrogen"></option>
+                <option value="4 Argon"></option>
+                <option value="4 Carbon"></option>
+              </datalist>
+            </label>
+          </div>
+          <p id="worker-help">Use a model shown in your Gemini Task picker. The default is 4 Hydrogen. Tasks use the allowance of your signed-in Gemini plan.</p>
           <div class="snippet">
-            <div class="snippet-bar"><span>Codex prompt</span><button type="button" hidden aria-label="Copy example Codex prompt">Copy</button></div>
-            <pre><code>$delegateH AUTO review this change and delegate independent checks if useful.</code></pre>
+            <div class="snippet-bar"><span>Codex prompt</span><button type="button" hidden aria-label="Copy Codex prompt">Copy</button></div>
+            <pre><code id="delegate-prompt">$delegateH AUTO Use 4 Hydrogen as the Gemini Tasks worker. Review this change and delegate independent checks if useful.</code></pre>
           </div>
           <dl class="modes">
-            <div><dt>AUTO</dt><dd>Let Sol decide whether to delegate.</dd></div>
+            <div><dt>AUTO</dt><dd>Let Codex decide whether to delegate.</dd></div>
             <div><dt>BUILD</dt><dd>Request proposed changes for independent pieces.</dd></div>
             <div><dt>DEBUG</dt><dd>Investigate different causes in parallel.</dd></div>
             <div><dt>AUDIT</dt><dd>Review for correctness, reliability, or performance.</dd></div>
             <div><dt>TEST</dt><dd>Find gaps and propose regression coverage.</dd></div>
             <div><dt>RESEARCH</dt><dd>Assess sources and evidence independently.</dd></div>
           </dl>
-          <p>The skill uses up to three independent tasks by default. Codex hands off scoped prompts through the Mac app when computer use is available. You can also submit those prompts manually. Sol reviews proposed changes and runs the project checks.</p>
+          <p>The skill uses up to three independent tasks by default. Codex hands off scoped prompts through the Mac app when computer use is available. You can also submit those prompts manually. Codex reviews proposed changes and runs the project checks.</p>
           <a href="https://github.com/HighTierRoach/delegateH/blob/main/delegateH/references/gemini-tasks.md">Read the Gemini Tasks workflow <span aria-hidden="true">↗</span></a>
         </div>
       </section>

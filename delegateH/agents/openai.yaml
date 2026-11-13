@@ -1,4 +1,4 @@
 interface:
   display_name: "delegateH"
-  short_description: "Coordinate Hydrogen tasks in Gemini for Mac"
-  default_prompt: "Use $delegateH in AUDIT mode with three independent Gemini Tasks."
+  short_description: "Coordinate Gemini Tasks from your Codex session"
+  default_prompt: "Use $delegateH in AUDIT mode with 4 Hydrogen and three independent Gemini Tasks."

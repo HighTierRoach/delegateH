@@ -126,6 +126,23 @@ p code { background: #e9eee2; padding: .13em .29em; border-radius: 4px; color: #
 .snippet pre { margin: 0; padding: .9rem; white-space: pre-wrap; overflow-wrap: anywhere; font: .85rem/1.7 var(--mono); }
 .snippet code { font-size: inherit; }
 #usage .snippet { margin-top: 0; }
+.model-controls {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 14rem), 1fr));
+  gap: .75rem;
+  margin-block: .85rem;
+}
+.model-controls label { display: grid; gap: .25rem; font-size: .92rem; font-weight: 650; }
+.model-controls input {
+  min-width: 0;
+  width: 100%;
+  border: 1px solid #849489;
+  border-radius: 6px;
+  padding: .6rem .75rem;
+  background: #fff;
+  color: var(--ink);
+  font: 400 1rem var(--mono);
+}
 .modes { margin: 1.4rem 0; display: grid; grid-template-columns: 1fr 1fr; gap: 0 1.3rem; }
 .modes > div { border-top: 1px solid var(--line); padding: .65rem 0; }
 .modes dt { font: 650 .83rem/1.65 var(--mono); color: #37653f; }

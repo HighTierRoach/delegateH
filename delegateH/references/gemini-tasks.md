@@ -4,12 +4,12 @@ Use Gemini for Mac signed in to the intended personal Google AI Pro account. Goo
 
 ## Submit and collect
 
-1. Open Gemini for Mac with the available computer-use tool. Open a new conversation, select **Task**, then check the model picker for **4 Hydrogen**. Select it when needed. If the app requests sign-in or account consent, let the user complete that step.
-2. Paste one prompt and submit it. Confirm the posted prompt in the new task thread before opening another conversation. Give each independent task its own thread. Record the task ID and thread title or another visible way to find it. Verify each submission before retrying.
-3. Reopen the task thread and look for the completion state and final answer. The response’s **More actions** menu may show **Used 4 Hydrogen model**. Treat that indicator as confirmation when present. Record only the relevant result and flag any incomplete tasks or model you could not verify.
+1. Open Gemini for Mac with the available computer-use tool. Open a new conversation, select **Task**, and select the requested worker model in the picker. Use **4 Hydrogen** by default. Match the request against the model label in the picker, allowing unambiguous forms such as “Argon” for “4 Argon.” If the app omits the model, report the available Task models and wait for the user to choose. If the app requests sign-in or account consent, let the user complete that step.
+2. Verify the selection before submitting each prompt. The picker can reset between tasks. Confirm the posted prompt in the new task thread before opening another conversation. Give each independent task its own thread. Record the task ID and thread title or another visible way to find it. Verify each submission before retrying.
+3. Reopen the task thread and look for the completion state and final answer. Check the response’s **More actions** menu for the **Used … model** entry. Record the reported model and flag missing metadata. If it reports a different model, discard that result for the selected worker and report the mismatch. The composer picker can change after submission and only shows what is selected for the next prompt.
 4. Validate each claim against local evidence. For edits, inspect the proposed diff and reconcile it with the working tree before applying it. Run the actual project checks from Codex.
 
-When computer use is unavailable, provide the prepared prompts for the user to submit in **Task** mode and collect the answers they return. The same review steps apply. To stop a running task, open its thread and use **Stop response**.
+When computer use is unavailable, provide the prompts and the chosen worker model for the user to submit in **Task** mode. Ask for the final answers and any response model labels. The same review steps apply. To stop a running task, open its thread and use **Stop response**.
 
 ## Prompt template
 

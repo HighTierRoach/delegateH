@@ -1,3 +1,25 @@
+const modelControls = document.querySelector(".model-controls");
+
+if (modelControls) {
+  const coordinator = modelControls.querySelector("#coordinator-model");
+  const worker = modelControls.querySelector("#worker-model");
+  const prompt = document.querySelector("#delegate-prompt");
+
+  function updatePrompt() {
+    const coordinatorModel = coordinator.value.trim();
+    const workerModel = worker.value.trim() || "4 Hydrogen";
+    const sentences = ["$delegateH AUTO"];
+    if (coordinatorModel) sentences.push(`Use ${coordinatorModel} as orchestrator.`);
+    sentences.push(`Use ${workerModel} as the Gemini Tasks worker.`);
+    sentences.push("Review this change and delegate independent checks if useful.");
+    prompt.textContent = sentences.join(" ");
+  }
+
+  modelControls.addEventListener("input", updatePrompt);
+  updatePrompt();
+  modelControls.hidden = false;
+}
+
 const announcement = document.querySelector("#copy-status");
 
 if (navigator.clipboard?.writeText) {
