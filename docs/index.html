@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Set up delegateH, a Codex skill that coordinates 4 Hydrogen tasks in Gemini for Mac.">
+  <meta name="description" content="Use Gemini Tasks on Mac with delegateH when Gemini 4 Hydrogen is unavailable in Antigravity on your promotional or trial Google AI Pro plan.">
   <meta name="theme-color" content="#141d1a">
   <title>delegateH · Codex and Gemini Tasks</title>
   <link rel="stylesheet" href="styles.css">
@@ -26,8 +26,8 @@
       <div class="wrap hero-grid">
         <div>
           <h1>delegate<span>H</span></h1>
-          <p class="hero-lead">Delegate independent work from Codex to Gemini 4 Hydrogen.</p>
-          <p class="hero-detail">GPT-6.1 Sol assigns tasks in Gemini for Mac, reviews each result, and integrates the changes you keep.</p>
+          <p class="hero-lead">Use Hydrogen in Gemini Tasks when it’s missing from Antigravity.</p>
+          <p class="hero-detail">On a promotional or trial Google AI Pro plan, check the model picker in Gemini for Mac. If Task mode offers 4 Hydrogen, delegateH can hand off work from Codex using your existing plan.</p>
           <div class="hero-links">
             <a class="button" href="#setup">Set up delegateH <span aria-hidden="true">↓</span></a>
             <a href="https://github.com/HighTierRoach/delegateH">View source <span aria-hidden="true">↗</span></a>
@@ -46,23 +46,23 @@
 
     <div class="wrap content">
       <aside class="status" aria-labelledby="status-title">
-        <h2 id="status-title">Verification status</h2>
-        <p>Codex submitted a structured test through Gemini for Mac and collected the correct result. The app’s response menu confirmed 4 Hydrogen.</p>
+        <h2 id="status-title">Check your plan in Gemini Tasks</h2>
+        <p>Google excludes some Antigravity models from free trials. Gemini Tasks has its own model picker, and access can vary by account. In one test, Antigravity’s CLI and ACP catalogs omitted Hydrogen while Gemini for Mac completed a task and reported <strong>Used 4 Hydrogen model</strong>. <a href="https://antigravity.google/docs/faq">Antigravity plan FAQ</a> · <a href="https://support.google.com/gemini/answer/18648722">Gemini model availability</a></p>
       </aside>
 
       <section id="setup" class="section-grid">
         <div>
           <h2>Setup</h2>
-          <p class="section-intro">Use the Gemini app and your signed-in Google AI plan.</p>
+          <p class="section-intro">The workaround uses your signed-in Gemini account on macOS.</p>
         </div>
         <ol class="steps">
           <li>
-            <h3>Prepare Codex and Gemini</h3>
-            <p>Install Git and the official Gemini app for Mac. Select GPT-6.1 Sol in Codex and sign in to Gemini with your personal Google AI Pro account. <a href="https://gemini.google/desktop/">Download Gemini</a>.</p>
+            <h3>Check Hydrogen in Gemini Tasks</h3>
+            <p>Install Gemini for Mac and sign in with the Google account that has your promotional plan. Open a new conversation, choose <strong>Task</strong>, and check that you can select <strong>4 Hydrogen</strong>. Complete Tasks onboarding if prompted. The workaround requires access to both Task mode and 4 Hydrogen. <a href="https://gemini.google/desktop/">Download Gemini</a> · <a href="https://support.google.com/gemini/answer/17208717">Google’s Tasks setup guide</a></p>
           </li>
           <li>
             <h3>Install the Codex skill</h3>
-            <p>From a fresh checkout, copy the skill folder into Codex’s user skills directory. If you already have delegateH installed, review your local changes before updating it.</p>
+            <p>Install Git and select GPT-6.1 Sol in Codex. From a fresh checkout, copy the skill folder into Codex’s user skills directory. If you already have delegateH installed, review your local changes before updating it.</p>
             <div class="snippet">
               <div class="snippet-bar"><span>Shell</span><button type="button" hidden aria-label="Copy installation commands">Copy</button></div>
               <pre><code>git clone https://github.com/HighTierRoach/delegateH.git
@@ -73,8 +73,8 @@ test ! -e "$HOME/.agents/skills/delegateH" &amp;&amp;
             </div>
           </li>
           <li>
-            <h3>Check Gemini Tasks access</h3>
-            <p>In a new Gemini conversation, choose <strong>Task</strong> and check that the model picker offers <strong>4 Hydrogen</strong>. Complete Tasks onboarding if prompted. <a href="https://support.google.com/gemini/answer/17208717">Google’s Tasks setup guide</a>.</p>
+            <h3>Verify a response</h3>
+            <p>Submit a simple task such as <code>Compute 12 + 7.</code> After it completes, open the response’s <strong>More actions</strong> menu and look for <strong>Used 4 Hydrogen model</strong>.</p>
           </li>
         </ol>
       </section>
