@@ -1,20 +1,19 @@
 ---
 name: delegateH
-description: Coordinate independent Gemini 4 Hydrogen workers through Google Antigravity from the active GPT-6.1 Sol Codex session. Use for explicit $delegateH requests or complex build, debug, audit, test, or research tasks that clearly benefit from independent Hydrogen work.
+description: Coordinate independent 4 Hydrogen tasks in Gemini for Mac from the active GPT-6.1 Sol Codex session. Use for explicit $delegateH requests or complex work that benefits from independent analysis or proposed edits.
 ---
 
 # delegateH
 
-Use the active GPT-6.1 Sol (`gpt-6.1-sol`) Codex session as coordinator. Verify the active session model when available. If it differs or cannot be confirmed, tell the user and request that they select Sol before delegating. Antigravity workers are separate local processes. Keep planning, review, integration, testing, and final decisions in this session.
+Use GPT-6.1 Sol (`gpt-6.1-sol`) as coordinator. If the session reports a different model, ask the user to select Sol. Keep planning, review, edits, and testing in Codex.
 
-1. Read the user's request and inspect the project, working changes, and relevant instructions. In AUTO, handle straightforward or interdependent work directly. For independent work, identify the objective, expected evidence, allowed files, and constraints for each worker. Honor explicit modes and counts. Default to three useful tasks and cap the round at five or a lower configured limit.
-2. Read [operations](references/operations.md) for the manifest and review commands. Run the healthcheck before delegation. The exact Hydrogen slug must be in the account catalog. Report model, subscription, quota, or auth blockers and proceed with locally supported work within the user's scope. Preserve the pinned models.
-3. Use BUILD for edits, DEBUG for independent diagnoses, AUDIT for independent defensive, correctness, reliability, architecture, or performance reviews, TEST for coverage or regression work, and RESEARCH for evidence-based investigations. Provide research sources or excerpts when worker web access is unavailable. Assign distinct writable paths. Include only the committed files and sanitized context each worker needs. Treat the manifest and explicitly shared files as content sent to Google's subscription service. Keep secrets, private data, and uncommitted work out of the handoff.
-4. Run the manifest with the local dispatcher. Keep the process supervised and monitor its JSON events and summary. A candidate is ready for review. Verify its evidence and diff, compare with the original tree, and request a revision as a new round when useful.
-5. Inspect all accepted patches and check applicability in the original tree. Resolve conflicts explicitly while preserving existing staged, unstaged, and untracked work. Apply only reviewed edits and run the actual project checks. Clean up reviewed runs and report the model, worker count, verified results, and unresolved failures.
+1. In AUTO, handle straightforward or interdependent work directly. When delegation helps, give each task a distinct objective, task ID, expected evidence, and only the authorized context it needs. Honor explicit modes and counts. Use up to three independent tasks by default and cap a round at five.
+2. Read [Gemini Tasks](references/gemini-tasks.md) and submit each task in a separate conversation in the signed-in Gemini for Mac app. Select **Task** and verify **4 Hydrogen** before submitting. Use Codex computer use when available. Otherwise hand the user the prepared prompts for manual submission. Use this Gemini Tasks path for ordinary invocations. The [Antigravity workflow](references/operations.md) is reserved for an explicit request to use that integration.
+3. In BUILD request proposed edits. In DEBUG request independent diagnoses. In AUDIT request defensive findings. In TEST request test cases or proposed test edits. In RESEARCH request evidence-backed analysis of supplied sources. Use authorized, sanitized excerpts and keep project folders disconnected for these prompt-based tasks. Gemini returns recommendations or proposed changes, and Codex performs local edits and runs checks.
+4. Reopen each task to collect its result. Verify task identity, completion, and the reported model when visible. Review results against local evidence. Apply only accepted changes, preserve existing work, and report any incomplete or unverified tasks.
 
 Examples
 
-- `$delegateH BUILD this feature using 3 Hydrogen workers.`
-- `$delegateH Use AUDIT mode with maximum parallelism.`
+- `$delegateH BUILD propose changes for this feature with 3 Hydrogen tasks.`
+- `$delegateH AUDIT review this change from two independent angles.`
 - `$delegateH TEST this project for edge cases.`

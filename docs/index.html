@@ -3,9 +3,9 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Set up delegateH, a Codex skill that coordinates Gemini 4 Hydrogen workers through Google Antigravity.">
+  <meta name="description" content="Set up delegateH, a Codex skill that coordinates 4 Hydrogen tasks in Gemini for Mac.">
   <meta name="theme-color" content="#141d1a">
-  <title>delegateH · Codex and Antigravity</title>
+  <title>delegateH · Codex and Gemini Tasks</title>
   <link rel="stylesheet" href="styles.css">
   <script src="copy.js" defer></script>
 </head>
@@ -27,7 +27,7 @@
         <div>
           <h1>delegate<span>H</span></h1>
           <p class="hero-lead">Delegate independent work from Codex to Gemini 4 Hydrogen.</p>
-          <p class="hero-detail">GPT-6.1 Sol coordinates through Google Antigravity, reviews each result, and integrates the changes you keep.</p>
+          <p class="hero-detail">GPT-6.1 Sol assigns tasks in Gemini for Mac, reviews each result, and integrates the changes you keep.</p>
           <div class="hero-links">
             <a class="button" href="#setup">Set up delegateH <span aria-hidden="true">↓</span></a>
             <a href="https://github.com/HighTierRoach/delegateH">View source <span aria-hidden="true">↗</span></a>
@@ -37,8 +37,8 @@
           <h2 id="flow-title">How a round works</h2>
           <dl>
             <div><dt>Plan</dt><dd>Sol scopes independent tasks<small>gpt-6.1-sol</small></dd></div>
-            <div><dt>Dispatch</dt><dd>Antigravity runs 1–5 workers<small>gemini-4-hydrogen-medium</small></dd></div>
-            <div><dt>Review</dt><dd>Sol checks evidence and patches<small>Review before integration</small></dd></div>
+            <div><dt>Dispatch</dt><dd>Gemini for Mac runs the tasks<small>4 Hydrogen</small></dd></div>
+            <div><dt>Review</dt><dd>Sol checks evidence and proposed patches</dd></div>
           </dl>
         </aside>
       </div>
@@ -47,19 +47,18 @@
     <div class="wrap content">
       <aside class="status" aria-labelledby="status-title">
         <h2 id="status-title">Verification status</h2>
-        <p>A manual task in Gemini for Mac completed with 4 Hydrogen selected. The Antigravity CLI and ACP catalogs both omitted Hydrogen, so live delegateH dispatch remains unverified. Local tests covered three concurrent fixture workers.</p>
+        <p>Codex submitted a structured test through Gemini for Mac and collected the correct result. The app’s response menu confirmed 4 Hydrogen.</p>
       </aside>
 
       <section id="setup" class="section-grid">
         <div>
           <h2>Setup</h2>
-          <p class="section-intro">Tested on macOS. The dispatcher uses Python’s standard library.</p>
+          <p class="section-intro">Use the Gemini app and your signed-in Google AI plan.</p>
         </div>
         <ol class="steps">
           <li>
-            <h3>Prepare Codex and Antigravity</h3>
-            <p>Install Python 3.9 or newer, Git, and the <a href="https://antigravity.google/docs/cli/getting-started/">official Antigravity CLI</a>. Select GPT-6.1 Sol in Codex. Launch <code>agy</code> and sign in with your personal Google AI Pro account. The runner also looks for <code>~/.local/bin/agy</code>.</p>
-            <p>Worker requests use included Antigravity quota. The runner excludes Gemini API keys and Cloud ADC environment settings, and disables credit overages for each run.</p>
+            <h3>Prepare Codex and Gemini</h3>
+            <p>Install Git and the official Gemini app for Mac. Select GPT-6.1 Sol in Codex and sign in to Gemini with your personal Google AI Pro account. <a href="https://gemini.google/desktop/">Download Gemini</a>.</p>
           </li>
           <li>
             <h3>Install the Codex skill</h3>
@@ -74,14 +73,8 @@ test ! -e "$HOME/.agents/skills/delegateH" &amp;&amp;
             </div>
           </li>
           <li>
-            <h3>Check model access</h3>
-            <div class="snippet">
-              <div class="snippet-bar"><span>Shell</span><button type="button" hidden aria-label="Copy model check commands">Copy</button></div>
-              <pre><code>runner="$HOME/.agents/skills/delegateH/scripts/orchestrator.py"
-python3 "$runner" healthcheck</code></pre>
-            </div>
-            <p><code>listed</code> means the pinned Hydrogen model appears in your account catalog. Run <code>python3 "$runner" healthcheck --probe</code> to check a live response. If you see <code>model_unavailable</code>, check <code>agy models</code> and your Antigravity plan and model access.</p>
-            <p>Run <code>python3 "$runner" healthcheck --acp</code> to inspect the official Antigravity ACP session catalog without submitting a prompt.</p>
+            <h3>Check Gemini Tasks access</h3>
+            <p>In a new Gemini conversation, choose <strong>Task</strong> and check that the model picker offers <strong>4 Hydrogen</strong>. Complete Tasks onboarding if prompted. <a href="https://support.google.com/gemini/answer/17208717">Google’s Tasks setup guide</a>.</p>
           </li>
         </ol>
       </section>
@@ -98,14 +91,14 @@ python3 "$runner" healthcheck</code></pre>
           </div>
           <dl class="modes">
             <div><dt>AUTO</dt><dd>Let Sol decide whether to delegate.</dd></div>
-            <div><dt>BUILD</dt><dd>Split implementation across distinct files.</dd></div>
+            <div><dt>BUILD</dt><dd>Request proposed changes for independent pieces.</dd></div>
             <div><dt>DEBUG</dt><dd>Investigate different causes in parallel.</dd></div>
             <div><dt>AUDIT</dt><dd>Review for correctness, reliability, or performance.</dd></div>
             <div><dt>TEST</dt><dd>Find gaps and propose regression coverage.</dd></div>
             <div><dt>RESEARCH</dt><dd>Assess sources and evidence independently.</dd></div>
           </dl>
-          <p>The skill defaults to three workers and caps a round at five. Each worker gets an isolated snapshot of the committed files you select. Keep secrets out of prompts and shared files. Sol reviews patches and runs the project checks before integration.</p>
-          <a href="https://github.com/HighTierRoach/delegateH/blob/main/delegateH/references/operations.md">Read the operations guide <span aria-hidden="true">↗</span></a>
+          <p>The skill uses up to three independent tasks by default. Codex hands off scoped prompts through the Mac app when computer use is available. You can also submit those prompts manually. Sol reviews proposed changes and runs the project checks.</p>
+          <a href="https://github.com/HighTierRoach/delegateH/blob/main/delegateH/references/gemini-tasks.md">Read the Gemini Tasks workflow <span aria-hidden="true">↗</span></a>
         </div>
       </section>
     </div>

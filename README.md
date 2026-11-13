@@ -1,12 +1,12 @@
 # delegateH
 
-A Codex skill that dispatches independent Gemini 4 Hydrogen tasks through Google's Antigravity CLI. GPT-6.1 Sol stays in charge of planning, reviewing results, integrating changes, and running checks.
+A Codex skill that sends independent tasks to 4 Hydrogen in Gemini for Mac. GPT-6.1 Sol plans the work, reviews results, integrates accepted changes, and runs checks.
 
 [Read the setup guide](https://hightierroach.github.io/delegateH/)
 
 ## Install
 
-You need Codex with `gpt-6.1-sol`, Python 3.9+, Git, and the [Antigravity CLI](https://antigravity.google/docs/cli/getting-started/). Sign in to Antigravity with a personal Google AI Pro account that has Hydrogen access.
+You need Codex with `gpt-6.1-sol`, Git to clone this repository, and the [Gemini app for Mac](https://gemini.google/desktop/). Sign in with your personal Google AI Pro account. In Gemini, open a new conversation, choose **Task**, and check that **4 Hydrogen** is available. Complete the app’s Tasks onboarding if prompted.
 
 ```sh
 git clone https://github.com/HighTierRoach/delegateH.git
@@ -14,7 +14,6 @@ cd delegateH
 mkdir -p "$HOME/.agents/skills"
 test ! -e "$HOME/.agents/skills/delegateH" &&
   cp -R delegateH "$HOME/.agents/skills/"
-python3 "$HOME/.agents/skills/delegateH/scripts/orchestrator.py" healthcheck
 ```
 
 Use a fresh install destination. If the skill is already installed, review your local changes before updating it. Start a Codex session with GPT-6.1 Sol selected and enter:
@@ -23,13 +22,11 @@ Use a fresh install destination. If the skill is already installed, review your 
 $delegateH AUTO review this change and delegate independent checks if useful.
 ```
 
-The default worker is `gemini-4-hydrogen-medium`. The runner uses Antigravity account sign-in and included quota, with AI credit overages disabled. It excludes Gemini API keys and Cloud ADC environment settings. If the exact model is absent from your account catalog, the runner stops before dispatch. Use `healthcheck --probe` for a minimal live check after the model is listed.
+Codex uses computer use to submit tasks and read results in the Mac app. Each task receives scoped prompt context and can return findings or a proposed patch for Codex to verify. If computer use is unavailable, you can submit the prepared prompts manually. [Gemini Tasks workflow](delegateH/references/gemini-tasks.md)
 
-Use `healthcheck --acp` to inspect the official Antigravity ACP session catalog and its session capabilities without submitting a prompt.
+A live Mac handoff returned the expected structured result, and Gemini’s response menu confirmed 4 Hydrogen. The existing Antigravity dispatcher remains available for an explicit Antigravity workflow. [Antigravity operations guide](delegateH/references/operations.md)
 
-Local tests on macOS cover three concurrent fixture workers, separate Git snapshots, patch review and integration, failure handling, and cleanup. A manual Gemini for Mac task completed with 4 Hydrogen selected. The Antigravity CLI and ACP catalogs still omitted Hydrogen, so live `delegateH` dispatch remains unverified.
-
-See the [operations guide](delegateH/references/operations.md) for manifest fields, scope rules, and patch review.
+The Antigravity dispatcher’s local tests require Python 3.9 or newer.
 
 ```sh
 python3 -B -m unittest discover -s delegateH/tests -v

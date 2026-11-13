@@ -1,4 +1,4 @@
 interface:
   display_name: "delegateH"
-  short_description: "Coordinate Antigravity Hydrogen workers"
-  default_prompt: "Use $delegateH in AUDIT mode with 3 Hydrogen workers."
+  short_description: "Coordinate Hydrogen tasks in Gemini for Mac"
+  default_prompt: "Use $delegateH in AUDIT mode with three independent Gemini Tasks."
