@@ -1,0 +1,8 @@
+{
+  "coordinator_model": "gpt-6.1-sol",
+  "worker_model": "gemini-4-hydrogen-medium",
+  "default_workers": 3,
+  "max_workers": 5,
+  "timeout_seconds": 600,
+  "transient_retries": 1
+}

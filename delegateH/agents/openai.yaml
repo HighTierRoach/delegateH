@@ -1,0 +1,4 @@
+interface:
+  display_name: "delegateH"
+  short_description: "Coordinate Antigravity Hydrogen workers"
+  default_prompt: "Use $delegateH in AUDIT mode with 3 Hydrogen workers."

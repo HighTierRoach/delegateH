@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Set up delegateH, a Codex skill that coordinates Gemini 4 Hydrogen workers through Google Antigravity.">
+  <meta name="theme-color" content="#141d1a">
+  <title>delegateH · Codex and Antigravity</title>
+  <link rel="stylesheet" href="styles.css">
+  <script src="copy.js" defer></script>
+</head>
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+  <header class="site-header">
+    <div class="wrap header-row">
+      <a class="brand" href="./"><span class="mark" aria-hidden="true">H</span>delegateH</a>
+      <nav aria-label="Main navigation">
+        <a href="#setup">Setup</a>
+        <a href="#usage">Usage</a>
+        <a class="source" href="https://github.com/HighTierRoach/delegateH">GitHub <span aria-hidden="true">↗</span></a>
+      </nav>
+    </div>
+  </header>
+  <main id="main">
+    <section class="hero">
+      <div class="wrap hero-grid">
+        <div>
+          <h1>delegate<span>H</span></h1>
+          <p class="hero-lead">Delegate independent work from Codex to Gemini 4 Hydrogen.</p>
+          <p class="hero-detail">GPT-6.1 Sol coordinates through Google Antigravity, reviews each result, and integrates the changes you keep.</p>
+          <div class="hero-links">
+            <a class="button" href="#setup">Set up delegateH <span aria-hidden="true">↓</span></a>
+            <a href="https://github.com/HighTierRoach/delegateH">View source <span aria-hidden="true">↗</span></a>
+          </div>
+        </div>
+        <aside class="flow" aria-labelledby="flow-title">
+          <h2 id="flow-title">How a round works</h2>
+          <dl>
+            <div><dt>Plan</dt><dd>Sol scopes independent tasks<small>gpt-6.1-sol</small></dd></div>
+            <div><dt>Dispatch</dt><dd>Antigravity runs 1–5 workers<small>gemini-4-hydrogen-medium</small></dd></div>
+            <div><dt>Review</dt><dd>Sol checks evidence and patches<small>Review before integration</small></dd></div>
+          </dl>
+        </aside>
+      </div>
+    </section>
+
+    <div class="wrap content">
+      <aside class="status" aria-labelledby="status-title">
+        <h2 id="status-title">Verification status</h2>
+        <p>Codex discovery and the local dispatcher were tested on macOS, including three concurrent fixture workers. Live Hydrogen inference and concurrency remain unverified. The test account returned <code>model_unavailable</code>.</p>
+      </aside>
+
+      <section id="setup" class="section-grid">
+        <div>
+          <h2>Setup</h2>
+          <p class="section-intro">Tested on macOS. The dispatcher uses Python’s standard library.</p>
+        </div>
+        <ol class="steps">
+          <li>
+            <h3>Prepare Codex and Antigravity</h3>
+            <p>Install Python 3.9 or newer, Git, and the <a href="https://antigravity.google/docs/cli/getting-started/">official Antigravity CLI</a>. Select GPT-6.1 Sol in Codex. Launch <code>agy</code> and sign in with your personal Google AI Pro account. The runner also looks for <code>~/.local/bin/agy</code>.</p>
+            <p>Worker requests use included Antigravity quota. The runner excludes Gemini API keys and Cloud ADC environment settings, and disables credit overages for each run.</p>
+          </li>
+          <li>
+            <h3>Install the Codex skill</h3>
+            <p>From a fresh checkout, copy the skill folder into Codex’s user skills directory. If you already have delegateH installed, review your local changes before updating it.</p>
+            <div class="snippet">
+              <div class="snippet-bar"><span>Shell</span><button type="button" hidden aria-label="Copy installation commands">Copy</button></div>
+              <pre><code>git clone https://github.com/HighTierRoach/delegateH.git
+cd delegateH
+mkdir -p "$HOME/.agents/skills"
+test ! -e "$HOME/.agents/skills/delegateH" &amp;&amp;
+  cp -R delegateH "$HOME/.agents/skills/"</code></pre>
+            </div>
+          </li>
+          <li>
+            <h3>Check model access</h3>
+            <div class="snippet">
+              <div class="snippet-bar"><span>Shell</span><button type="button" hidden aria-label="Copy model check commands">Copy</button></div>
+              <pre><code>runner="$HOME/.agents/skills/delegateH/scripts/orchestrator.py"
+python3 "$runner" healthcheck</code></pre>
+            </div>
+            <p><code>listed</code> means the pinned Hydrogen model appears in your account catalog. Run <code>python3 "$runner" healthcheck --probe</code> to check a live response. If you see <code>model_unavailable</code>, check <code>agy models</code> and your Antigravity plan and model access.</p>
+          </li>
+        </ol>
+      </section>
+
+      <section id="usage" class="section-grid">
+        <div>
+          <h2>Usage</h2>
+          <p class="section-intro">Invoke the skill in a Codex session with Sol selected.</p>
+        </div>
+        <div>
+          <div class="snippet">
+            <div class="snippet-bar"><span>Codex prompt</span><button type="button" hidden aria-label="Copy example Codex prompt">Copy</button></div>
+            <pre><code>$delegateH AUTO review this change and delegate independent checks if useful.</code></pre>
+          </div>
+          <dl class="modes">
+            <div><dt>AUTO</dt><dd>Let Sol decide whether to delegate.</dd></div>
+            <div><dt>BUILD</dt><dd>Split implementation across distinct files.</dd></div>
+            <div><dt>DEBUG</dt><dd>Investigate different causes in parallel.</dd></div>
+            <div><dt>AUDIT</dt><dd>Review for correctness, reliability, or performance.</dd></div>
+            <div><dt>TEST</dt><dd>Find gaps and propose regression coverage.</dd></div>
+            <div><dt>RESEARCH</dt><dd>Assess sources and evidence independently.</dd></div>
+          </dl>
+          <p>The skill defaults to three workers and caps a round at five. Each worker gets an isolated snapshot of the committed files you select. Keep secrets out of prompts and shared files. Sol reviews patches and runs the project checks before integration.</p>
+          <a href="https://github.com/HighTierRoach/delegateH/blob/main/delegateH/references/operations.md">Read the operations guide <span aria-hidden="true">↗</span></a>
+        </div>
+      </section>
+    </div>
+  </main>
+  <footer class="wrap footer">
+    <span>delegateH</span>
+    <a href="https://github.com/HighTierRoach/delegateH">Source on GitHub <span aria-hidden="true">↗</span></a>
+  </footer>
+  <p class="sr-only" id="copy-status" role="status"></p>
+</body>
+</html>
